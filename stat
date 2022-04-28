@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Apr 28 15:00:05 2022
+
+@author: schoegelalexandre
+"""
+
+from scipy.integrate import ode
+
+import numpy as np
+
+import matplotlib.pylab as plt
+
+import math as math
+
+### modèle théorique 1 ( lattice gas model )
+
+Nb = 0 # nombre de point
+Nl = 3 #nombre de boules à gauche
+
+Nr = 2 #nombre de boules à droite
+
+d = 1 #largeur d'une zone (carré) accessible par la balle 
+
+x = 0 #future position du barrau
+
+l = 8*d #longeur total du ring
+
+i = x*d #taille du premier ring (d) 
+
+# l - i #taillle du second ring (g)
+
+j = 4*d 
+
+Gammar = math.factorial(i*j) / (math.factorial(Nr)*math.factorial(i*j-Nr))         #le nombre d'états(configurations) possible a la droite du systeme
+
+Gammal = math.factorial((l-i)*j) / (math.factorial(Nl)*math.factorial((l-i)*j-Nl)) #le nombre d'états(configurations) possible a la gauche du systeme
+
+Gammatot = Gammar*Gammal                                                           #nombre total de configurations possible dans l'ensemble du systeme
+
+ar = math.isqrt(Gammatot/Gammar)                                                   #Air total de déplacement des boules en fonction du nombre des autres boules dans le même ring (droite)
+
+al = math.isqrt(Gammatot/Gammal)  
+
+A = 68*34-x                                          #Air total de déplacement des boules en fonction du nombre des autres boules dans le même ring (droite)
+
+### Donnée 
+
+Nb = input("la valeur de Nb")
+ 
+Nl = input("la valeur de Nl")
+
+Ng = input("la valeur de Ng")
+
+x =  input("position du barrau")
+
+###right or left 
+
+###valeur théorique ( lattice gas model )
+
+For i in range(Nb) :
+    x =  input("position du barrau")
+    for j in range(Nl) :
+        lgml = al^2(A/al)((A/al)-1)
+    for w in range(Ng):
+        lgmr = ar^2(A/ar)((A/ar)-1)
+        
+        
+    
+
+lgm = a^2(A/a)((A/a)-1)
+          
+          
+          
