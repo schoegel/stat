@@ -10,21 +10,21 @@ A = 1.5554
 tau = 13.264
 
 def volt_to_cm(v):
-    return(v - y0)
+    return(-tau*math.log((v-y0)/A))     # Fonction pour convertir les volts en cm, déterminée à partir de mesures préliminaires
 
-mesures_volt = pd.read_excel ('Mesures positions.xlsx')
+mesures_volt = pd.read_excel ('Mesures positions.xlsx')     # On ouvre le tableur composé de toutes les mesures, en volt
 
-mesures_volt = np.asarray(mesures_volt).T
+mesures_volt = np.asarray(mesures_volt).T       # On convertit le tableau issu du package "panda" en tableau numpy
 
-mesures_volt_coherent = []
-
-for i in range(len(mesures_volt)):
+mesures_volt_coherent = []      # On créé un tableau cohérent où on élimine toutes les tensions inférieures à y0 (ce qui n'est pas sensé arriver,
+                                # cela correspond sans doute à un moment où le panneau réfléchissant s'est décalé de l'axe du capteur, et
+for i in range(len(mesures_volt)):      # le capteur s'est donc mis à viser dans le vide, d'où les valeurs trop basses
     mesures_volt_coherent.append(mesures_volt[i][np.where(mesures_volt[i]>y0)])
 
-mesures_distance = []
+mesures_distance = []       # Création d'un tableau de mesures de distance, où on convertit les volts en cm
 
 for i in range(len(mesures_volt)):
-    mesures_distance.append([volt_to_cm(x) for x in mesures_volt[i]])
+    mesures_distance.append([volt_to_cm(v) for v in mesures_volt_coherent[i]])
 
 noms_mesures = ['Mesure 1-2','Mesure 1-3', 'Mesure 2-2', 'Mesure 2-3', 'Mesure 3-3']
 subplots = [331,333,335,337,339]
